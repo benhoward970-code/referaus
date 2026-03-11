@@ -1,0 +1,34 @@
+{
+  "name": "api-testing-template",
+  "version": "1.0.0",
+  "description": "API testing setup with Vitest, Supertest, and more",
+  "scripts": {
+    "test": "vitest",
+    "test:api": "vitest run --dir __tests__/api",
+    "test:api:watch": "vitest --dir __tests__/api",
+    "test:coverage": "vitest run --coverage",
+    "test:contract": "vitest run --dir __tests__/contract",
+    "test:e2e": "vitest run --dir __tests__/e2e",
+    "test:load": "k6 run scripts/load-test.js",
+    "test:perf": "artillery run artillery.yml",
+    "pact:test": "vitest run --dir __tests__/contract",
+    "pact:publish": "pact-broker publish pacts --consumer-app-version=$npm_package_version --broker-base-url=$PACT_BROKER_URL --broker-token=$PACT_BROKER_TOKEN"
+  },
+  "devDependencies": {
+    "@pact-foundation/pact": "^13.1.0",
+    "@types/node": "^20.11.0",
+    "@types/supertest": "^6.0.2",
+    "@vitest/coverage-v8": "^1.2.0",
+    "msw": "^2.0.0",
+    "supertest": "^6.3.4",
+    "vitest": "^1.2.0",
+    "zod": "^3.22.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.8.0",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "socket.io": "^4.6.0",
+    "socket.io-client": "^4.6.0"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "lastChecks": {
+    "cronJobs": 1771726080,
+    "workQueue": null,
+    "email": null,
+    "calendar": null,
+    "weather": null
+  },
+  "notes": "All agents healthy. BizDev + Invoice Generator have 1 consecutive delivery error each (Telegram glitch, not broken). All others 0 errors."
+}

@@ -1,0 +1,36 @@
+{
+  "lastCheck": "2026-02-22T09:27:00+11:00",
+  "history": [
+    {
+      "timestamp": "2026-02-21T06:54:00+11:00",
+      "initialStatus": "DOWN",
+      "action": "restarted",
+      "restartMethod": "Start-Process node working-server.js -WindowStyle Hidden",
+      "postRestartStatus": "UP",
+      "healthResponse": {
+        "status": "healthy",
+        "database": "connected",
+        "uptime": 9.86,
+        "version": "2.0.0"
+      },
+      "note": "Backend was unresponsive at check time. Restarted successfully. All services healthy post-restart."
+    },
+    {
+      "timestamp": "2026-02-22T09:27:00+11:00",
+      "initialStatus": "UP",
+      "action": "none",
+      "healthResponse": {
+        "status": "healthy",
+        "database": "connected",
+        "uptime": 136.53,
+        "version": "2.0.0",
+        "services": {
+          "database": "healthy",
+          "api": "healthy",
+          "websocket": "healthy"
+        }
+      },
+      "note": "All systems healthy. No action required."
+    }
+  ]
+}

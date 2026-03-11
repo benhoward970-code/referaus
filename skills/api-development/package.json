@@ -1,0 +1,21 @@
+{
+  "name": "api-development-skill",
+  "version": "1.0.0",
+  "description": "Helper scripts for API development, testing, and monitoring",
+  "scripts": {
+    "monitor": "node monitor.js",
+    "test": "bash test-api.sh"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "api",
+    "testing",
+    "monitoring",
+    "performance"
+  ],
+  "author": "CLAWDY",
+  "license": "MIT"
+}
