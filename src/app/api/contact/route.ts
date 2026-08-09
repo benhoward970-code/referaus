@@ -20,6 +20,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
     }
 
+    // Length limits
+    if (String(name).trim().length > 120) {
+      return NextResponse.json({ error: "Name is too long" }, { status: 400 });
+    }
+    if (String(message).trim().length > 2000) {
+      return NextResponse.json({ error: "Message must be under 2000 characters" }, { status: 400 });
+    }
+    if (phone && !/^[\d\s\+\-\(\)]{6,20}$/.test(String(phone).trim())) {
+      return NextResponse.json({ error: "Invalid phone number" }, { status: 400 });
+    }
+
     // Save to contacts table
     const db = supabaseAdmin || supabaseServer;
     if (!db) {

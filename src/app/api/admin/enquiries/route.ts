@@ -39,3 +39,17 @@ export async function PATCH(request: NextRequest) {
 
   return NextResponse.json({ success: true });
 }
+
+export async function DELETE(request: NextRequest) {
+  const result = await verifyAdmin(request.headers.get("authorization"));
+  if (!result.ok) return result.response;
+  const { admin } = result;
+
+  const { id } = await request.json();
+  if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
+
+  const { error } = await admin.from("enquiries").delete().eq("id", id);
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  return NextResponse.json({ success: true });
+}

@@ -16,6 +16,7 @@ interface Props {
 export function EnquiryModal({ providerName, providerSlug, open, onClose }: Props) {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [form, setForm] = useState({ name: "", email: "", phone: "", service: "Personal Care", message: "" });
   const [draftSaved, setDraftSaved] = useState(false);
   const draftTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -56,15 +57,20 @@ export function EnquiryModal({ providerName, providerSlug, open, onClose }: Prop
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    await submitEnquiry({
+    setSubmitError("");
+    const result = await submitEnquiry({
       provider_slug: providerSlug,
       provider_name: providerName,
       ...form,
     });
     setSending(false);
-    setSent(true);
-    try { localStorage.removeItem(DRAFT_KEY); } catch { /**/ }
-    showToast("Enquiry sent successfully!", "success");
+    if (result.success) {
+      setSent(true);
+      try { localStorage.removeItem(DRAFT_KEY); } catch { /**/ }
+      showToast("Enquiry sent successfully!", "success");
+    } else {
+      setSubmitError(typeof result.error === "string" ? result.error : "Something went wrong. Please try again.");
+    }
   };
 
   if (!open) return null;
@@ -134,6 +140,9 @@ export function EnquiryModal({ providerName, providerSlug, open, onClose }: Prop
                     placeholder="Tell the provider about your needs..."
                     className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-line-200 text-ink-900 placeholder-gray-400 text-sm focus:outline-none focus:border-orange-500 transition-colors resize-none" />
                 </div>
+                {submitError && (
+                  <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-sm text-red-600">{submitError}</div>
+                )}
                 <div className="flex items-center gap-3">
                   <button type="submit" disabled={sending}
                     className="flex-1 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold text-sm transition-all hover:shadow-lg hover:shadow-blue-600/25">

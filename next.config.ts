@@ -1,4 +1,4 @@
-﻿import type { NextConfig } from "next";
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   compress: true,
@@ -12,16 +12,30 @@ const nextConfig: NextConfig = {
     ],
   },
   headers: async () => {
-    // Item 99: CSP Headers
-    // Use report-only mode to avoid breaking Next.js inline scripts
+    const isDev = process.env.NODE_ENV === "development";
+
     const supabaseHost = process.env.NEXT_PUBLIC_SUPABASE_URL
       ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname
       : "*.supabase.co";
 
+    // unsafe-eval is only needed in development (Next.js / Turbopack HMR).
+    // Remove it in production to prevent XSS via eval().
+    const scriptSrc = [
+      "'self'",
+      "'unsafe-inline'",
+      isDev ? "'unsafe-eval'" : "",
+      "https://vercel.live",
+      "https://*.vercel-analytics.com",
+      "https://*.vercel-insights.com",
+      "https://js.stripe.com",
+      "https://maps.googleapis.com",
+    ]
+      .filter(Boolean)
+      .join(" ");
+
     const csp = [
       `default-src 'self'`,
-      // Scripts: Next.js requires 'unsafe-inline' and 'unsafe-eval' for dev; in prod 'unsafe-inline' is still needed for inline event handlers
-      `script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.vercel-analytics.com https://*.vercel-insights.com https://js.stripe.com https://maps.googleapis.com`,
+      `script-src ${scriptSrc}`,
       `style-src 'self' 'unsafe-inline' https://fonts.googleapis.com`,
       `font-src 'self' data: https://fonts.gstatic.com`,
       `img-src 'self' data: blob: https://*.supabase.co https://${supabaseHost} https://api.qrserver.com https://referaus.com https://vercel.com https://*.stripe.com`,
@@ -43,6 +57,13 @@ const nextConfig: NextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Content-Security-Policy", value: csp },
           { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
+          // Restrict access to browser features we don't use
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=(), usb=(), display-capture=(), payment=(self)",
+          },
+          // Prevent cross-origin window takeovers while allowing OAuth popups
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
         ],
       },
       {

@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
 
   const { data, error } = await admin
     .from("providers")
-    .select("id, user_id, name, email, slug, plan, verified, created_at, phone, suburb, state, postcode, website, categories, bio, stripe_customer_id, stripe_subscription_id")
+    .select("id, user_id, name, email, slug, plan, verified, featured, created_at, phone, suburb, state, postcode, website, categories, bio, stripe_customer_id, stripe_subscription_id")
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -46,7 +46,7 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error: "Missing provider id" }, { status: 400 });
   }
 
-  const allowed = ["verified", "plan"];
+  const allowed = ["verified", "featured", "plan"];
   const safeUpdates: Record<string, unknown> = { updated_at: new Date().toISOString() };
   for (const key of allowed) {
     if (key in updates) safeUpdates[key] = updates[key];

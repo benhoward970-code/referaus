@@ -32,17 +32,8 @@ export default function RegisterPage() {
         return;
       }
 
-      // Create provider profile via API (service role, bypasses RLS)
-      const userId = (result as any).data?.user?.id;
-      if (role === "provider" && userId) {
-        const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-        fetch("/api/register-provider", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId, name, slug, email }),
-        }).catch(() => {});
-      }
-
+      // The provider/participant profile row is created server-side by the
+      // handle_new_user() DB trigger on auth.users insert — no client call needed.
       setDone(true);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
