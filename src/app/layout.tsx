@@ -55,13 +55,13 @@ export const metadata: Metadata = {
     siteName: "ReferAus",
     title: "ReferAus - NDIS Provider Directory",
     description: "Find trusted NDIS providers in Newcastle and the Hunter Region. Real reviews, direct messaging, free for participants.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "ReferAus - NDIS Provider Directory" }],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "ReferAus - NDIS Provider Directory" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "ReferAus - NDIS Provider Directory",
     description: "Find trusted NDIS providers in Newcastle and the Hunter Region. Free for participants.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
     creator: "@ReferAus",
   },
   robots: {

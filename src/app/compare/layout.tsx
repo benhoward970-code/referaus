@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: "Compare Providers | ReferAus — NDIS Provider Directory",
     description: "Compare NDIS providers side by side. Services, ratings, location, and more — all in one place.",
     url: "https://referaus.com/compare",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "ReferAus" }],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "ReferAus" }],
   },
   twitter: {
     card: "summary_large_image",
