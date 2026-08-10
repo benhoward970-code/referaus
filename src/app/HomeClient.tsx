@@ -322,10 +322,10 @@ export default function Home() {
     <>
       {/* Hero — dark editorial panel + Hunter Region map */}
       <div className="bg-paper">
-        <section ref={heroRef} className="grid lg:grid-cols-[42%_58%] min-h-[85vh]">
+        <section ref={heroRef} className="grid lg:grid-cols-[60%_40%] min-h-[85vh]">
           {/* Left: editorial copy */}
           <div className="relative flex flex-col justify-center bg-ink-950 text-cream px-8 sm:px-12 py-14 overflow-hidden">
-            <div className="relative z-10">
+            <div className="relative z-20">
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: d(0.5) }}
                 className="eyebrow-rule text-orange-500 mb-6">
                 Newcastle — Hunter Region, NSW
