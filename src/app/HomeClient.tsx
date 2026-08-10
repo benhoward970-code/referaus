@@ -351,21 +351,21 @@ export default function Home() {
                 <p className="mt-2 text-xs text-ink-soft">Press <kbd className="inline-flex items-center px-1.5 py-0.5 rounded border border-line-dark font-mono text-[10px] text-ink-soft">/</kbd> to search</p>
                 <div className="mt-4 flex flex-wrap gap-2 max-w-[420px]">
                   {["OT", "Speech", "Physio", "Psychology", "Support Coordination", "Plan Management", "Daily Living"].map((chip) => (
-                    <a
+                    <Link
                       key={chip}
                       href={`/providers?q=${encodeURIComponent(chip)}`}
                       className="link-underline border-line-dark text-cream hover:border-orange-500 !text-xs"
                     >
                       {chip}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </motion.div>
 
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: d(0.5), delay: d(0.45) }}
                 className="flex items-center gap-7">
-                <a href="/providers" className="btn-block">Search the network →</a>
-                <a href="/register" className="link-underline border-line-dark text-cream hover:border-orange-500">List a business</a>
+                <Link href="/providers" className="btn-block">Search the network →</Link>
+                <Link href="/register" className="link-underline border-line-dark text-cream hover:border-orange-500">List a business</Link>
               </motion.div>
             </div>
 
