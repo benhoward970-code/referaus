@@ -4,15 +4,18 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
-const AUTH_PATHS = ["/login", "/register", "/forgot-password", "/reset-password", "/admin", "/dashboard"];
+// Pages where the FAB would sit on top of a form the user is trying to use
+// (auth forms, dashboard/admin panels, and the contact form) rather than
+// float over passive content — hide it there entirely.
+const NO_FAB_PATHS = ["/login", "/register", "/forgot-password", "/reset-password", "/admin", "/dashboard", "/contact"];
 
 export function MobileFAB() {
   const [hidden, setHidden] = useState(false);
   const baseHeightRef = useRef<number | null>(null);
   const pathname = usePathname();
   // Computed synchronously on first render — avoids a flash of the FAB on
-  // auth pages before a useEffect would otherwise catch up (see ChatWidget).
-  const onAuthPage = AUTH_PATHS.some((p) => pathname?.startsWith(p));
+  // excluded pages before a useEffect would otherwise catch up (see ChatWidget).
+  const onAuthPage = NO_FAB_PATHS.some((p) => pathname?.startsWith(p));
 
   useEffect(() => {
     // Detect keyboard open via viewport height change
