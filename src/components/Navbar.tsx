@@ -238,7 +238,7 @@ export function Navbar() {
             <Logo />
           </div>
 
-          <div className="hidden md:flex items-center md:gap-4 lg:gap-7">
+          <div className="hidden lg:flex items-center gap-7">
             {NAV_LINKS.map(({ label, href }) => {
               const active = pathname === href || pathname.startsWith(href + "/");
               return (
@@ -257,7 +257,7 @@ export function Navbar() {
             })}
           </div>
 
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             <button
               onClick={() => {
                 window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true, bubbles: true }));
@@ -297,7 +297,7 @@ export function Navbar() {
           <button
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
-            className="md:hidden p-2 -mr-1 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-600 hover:text-ink-900 rounded-lg hover:bg-gray-100 transition-colors"
+            className="lg:hidden p-2 -mr-1 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-600 hover:text-ink-900 rounded-lg hover:bg-gray-100 transition-colors"
           >
             <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               {open ? (
@@ -322,7 +322,7 @@ export function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-40 bg-black/30 md:hidden"
+              className="fixed inset-0 z-40 bg-black/30 lg:hidden"
               onClick={() => setOpen(false)}
             />
             <motion.div
@@ -331,7 +331,7 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 300 }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-72 bg-white shadow-2xl flex flex-col md:hidden"
+              className="fixed top-0 right-0 bottom-0 z-50 w-72 bg-white shadow-2xl flex flex-col lg:hidden"
             >
               <div className="flex items-center justify-between px-5 h-16 border-b border-line-100">
                 <Logo />
