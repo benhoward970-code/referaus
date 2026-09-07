@@ -115,6 +115,32 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Failed to submit enquiry" }, { status: 500 });
   }
 
+  // If this visitor arrived via a Support Coordinator's referral link, credit
+  // the enquiry to that coordinator. Only the provider is recorded — never the
+  // participant's name, email, or message.
+  try {
+    const coordinatorId = request.cookies.get("referaus_ref")?.value;
+    if (coordinatorId) {
+      const { data: coordinator } = await admin
+        .from("coordinators")
+        .select("id")
+        .eq("id", coordinatorId)
+        .maybeSingle();
+
+      if (coordinator) {
+        await admin.from("referral_events").insert({
+          coordinator_id: coordinator.id,
+          event_type: "enquiry",
+          provider_id: providerRow?.id ?? null,
+          provider_name: provider_name ?? null,
+          provider_slug,
+        });
+      }
+    }
+  } catch {
+    // Attribution is best-effort — never fail the enquiry over it.
+  }
+
   // Notify the provider by email
   try {
     const { data: provider } = await admin

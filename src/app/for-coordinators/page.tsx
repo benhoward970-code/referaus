@@ -30,7 +30,7 @@ export default function ForCoordinatorsPage() {
             ReferAus is free for Support Coordinators. Search registered NDIS providers, share personalised links with your clients, and track who they connect with.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/contact?role=coordinator" className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-3.5 rounded-xl transition-colors text-base">
+            <Link href="/register?role=coordinator" className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-3.5 rounded-xl transition-colors text-base">
               Get Your Free SC Account
               <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </Link>
@@ -180,7 +180,7 @@ export default function ForCoordinatorsPage() {
           <h2 className="text-3xl font-black text-ink-900 mb-3">Ready to get started?</h2>
           <p className="text-ink-500 mb-6">Connect your clients with registered NDIS providers in the Hunter Region. Free for Support Coordinators, always.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/contact?role=coordinator" className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-3.5 rounded-xl transition-colors">
+            <Link href="/register?role=coordinator" className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-3.5 rounded-xl transition-colors">
               Get Your Free SC Account
             </Link>
             <Link href="/providers" className="inline-flex items-center justify-center gap-2 bg-white border border-line-200 hover:border-blue-300 text-ink-700 font-semibold px-7 py-3.5 rounded-xl transition-colors">

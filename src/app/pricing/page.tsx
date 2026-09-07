@@ -13,6 +13,15 @@ const plans = [
 
 type Plan = typeof plans[0];
 
+// Computed from the actual plan prices above rather than hardcoded, so the
+// "Save X%" badge can never drift out of sync with the real numbers again —
+// it was previously a static "17%" while the real per-plan savings ran
+// 42-44%. Averaged across the paid plans and rounded to the nearest percent.
+const paidPlans = plans.filter((p) => p.monthlyPrice > 0);
+const avgYearlySavingPercent = Math.round(
+  (paidPlans.reduce((sum, p) => sum + p.yearlySaving / (p.monthlyPrice * 12), 0) / paidPlans.length) * 100
+);
+
 function CheckoutModal({ plan, billing, onClose }: { plan: Plan; billing: "monthly" | "yearly"; onClose: () => void }) {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -171,7 +180,7 @@ export default function PricingPage() {
             <span className="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-300" style={{ transform: yearly ? "translateX(24px)" : "translateX(0)" }} />
           </button>
           <span className={"text-sm font-medium " + (yearly ? "text-ink-900" : "text-ink-400")}>Yearly</span>
-          <span className="font-mono text-[10px] uppercase tracking-wide px-2.5 py-1 rounded-[2px] border border-green-600 text-green-700">Save 17%</span>
+          <span className="font-mono text-[10px] uppercase tracking-wide px-2.5 py-1 rounded-[2px] border border-green-600 text-green-700">Save {avgYearlySavingPercent}%</span>
         </motion.div>
 
         <div ref={pricingCardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -1,10 +1,29 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { signUp, isConfigured, submitWaitlist } from "@/lib/supabase";
 
+type Role = "participant" | "provider" | "coordinator";
+const ROLES: { value: Role; label: string }[] = [
+  { value: "participant", label: "Participant" },
+  { value: "provider", label: "Provider" },
+  { value: "coordinator", label: "Coordinator" },
+];
+
 export default function RegisterPage() {
-  const [role, setRole] = useState<"participant" | "provider">("participant");
+  const searchParams = useSearchParams();
+  const [role, setRole] = useState<Role>("participant");
+
+  // Honour /register?role=provider and /register?role=coordinator so the CTAs
+  // on the audience landing pages land people on the right signup.
+  useEffect(() => {
+    const requested = searchParams.get("role");
+    if (requested === "provider" || requested === "coordinator" || requested === "participant") {
+      setRole(requested);
+    }
+  }, [searchParams]);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -76,21 +95,24 @@ export default function RegisterPage() {
         <div className="card-flat p-8">
           {/* Role toggle */}
           <div className="flex rounded-[3px] border border-ink-950 p-1 mb-6 bg-white">
-            <button
-              type="button"
-              onClick={() => setRole("participant")}
-              className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all ${role === "participant" ? "bg-ink-950 text-cream" : "text-ink-500 hover:text-ink-700"}`}
-            >
-              Participant
-            </button>
-            <button
-              type="button"
-              onClick={() => setRole("provider")}
-              className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all ${role === "provider" ? "bg-ink-950 text-cream" : "text-ink-500 hover:text-ink-700"}`}
-            >
-              Provider
-            </button>
+            {ROLES.map((r) => (
+              <button
+                key={r.value}
+                type="button"
+                onClick={() => setRole(r.value)}
+                className={`flex-1 py-2.5 rounded-lg text-[13px] sm:text-sm font-semibold transition-all ${role === r.value ? "bg-ink-950 text-cream" : "text-ink-500 hover:text-ink-700"}`}
+              >
+                {r.label}
+              </button>
+            ))}
           </div>
+
+          {role === "coordinator" && (
+            <p className="text-xs text-ink-500 mb-5 leading-relaxed">
+              Free for Support Coordinators. You&apos;ll get a personalised referral link
+              and a dashboard showing which providers your clients connect with.
+            </p>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
@@ -109,6 +131,7 @@ export default function RegisterPage() {
                 value={name}
                 onChange={e => setName(e.target.value)}
                 placeholder={role === "provider" ? "Your business name" : "Your full name"}
+                aria-describedby={role === "coordinator" ? "coordinator-name-hint" : undefined}
                 className="w-full px-4 py-3 rounded-[3px] bg-white border border-ink-950 text-ink-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
             </div>
@@ -143,7 +166,13 @@ export default function RegisterPage() {
               disabled={loading}
               className="w-full py-3 rounded-[3px] bg-orange-500 hover:bg-orange-400 disabled:opacity-60 text-ink-950 font-bold text-sm transition-all"
             >
-              {loading ? "Creating account…" : role === "provider" ? "Create Provider Account" : "Sign Up Free"}
+              {loading
+                ? "Creating account…"
+                : role === "provider"
+                  ? "Create Provider Account"
+                  : role === "coordinator"
+                    ? "Create Coordinator Account"
+                    : "Sign Up Free"}
             </button>
           </form>
 
