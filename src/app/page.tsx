@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: "Find NDIS Providers in Newcastle | ReferAus",
     description: "Search, compare and connect with trusted NDIS providers in Newcastle and the Hunter Region.",
     url: "https://referaus.com",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "ReferAus" }],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "ReferAus" }],
   },
   twitter: {
     card: "summary_large_image",

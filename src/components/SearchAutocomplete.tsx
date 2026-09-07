@@ -96,13 +96,14 @@ export function SearchAutocomplete({ className = '' }: { className?: string }) {
           className="w-full pl-11 pr-5 py-3.5 rounded-[3px] border border-ink-950 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent bg-white shadow-sm"
           aria-label="Search NDIS services and locations"
           aria-expanded={open && filtered.length > 0}
+          aria-controls="search-autocomplete-listbox"
           role="combobox"
           aria-autocomplete="list"
         />
       </div>
 
       {open && filtered.length > 0 && (
-        <ul className="absolute top-full left-0 right-0 mt-2 bg-white border border-line-200 rounded-xl shadow-xl overflow-hidden z-50" role="listbox">
+        <ul id="search-autocomplete-listbox" className="absolute top-full left-0 right-0 mt-2 bg-white border border-line-200 rounded-xl shadow-xl overflow-hidden z-50" role="listbox">
           {/* Header when no query */}
           {query.length === 0 && (
             <li className="px-4 pt-3 pb-1.5 text-[0.65rem] font-semibold text-ink-400 uppercase tracking-wider">
