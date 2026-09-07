@@ -13,18 +13,6 @@
 
 export const blogPosts: BlogPost[] = [
   {
-    "slug": "referaus-platform-update-march-2026",
-    "title": "ReferAus Platform Update — March 2026",
-    "excerpt": "We have been busy building. Here is what changed on ReferAus this month — real provider data, Stripe payments, cleaner design, and more honest copy.",
-    "date": "23 Mar 2026",
-    "author": "ReferAus Team",
-    "category": "Platform Updates",
-    "readTime": "3 min read",
-    "coverImage": "/blog/platform-update.jpg",
-    "tags": ["ReferAus", "update", "platform", "2026"],
-    "content": "## What We Have Been Working On\n\nReferAus is a new platform, and we are building in public. Here is a rundown of the changes we shipped this month.\n\n## Real Provider Data\n\nWe removed all placeholder and demo content from the site. Every provider you see on ReferAus is a real, verified NDIS provider. No fake listings, no made-up reviews. If it is on the platform, it is real.\n\n## Subscription Payments\n\nProviders can now sign up for a paid plan directly on the site. We have three tiers — Starter ($29/mo), Pro ($79/mo), and Premium ($149/mo) — with Stripe handling payments securely. Free listings are still available for providers who want basic visibility.\n\n## Cleaner, Honest Copy\n\nWe cleaned up marketing language across the site. No more inflated numbers or vague claims. The mailing list section now says what it does without pretending we have thousands of subscribers. We would rather be honest and small than impressive and fake.\n\n## Design Polish\n\nSmall but meaningful design improvements across the homepage, provider profiles, and blog. Faster load times, better mobile layout, and consistent branding throughout.\n\n## What Is Next\n\n- **Provider onboarding flow** — making it easier for providers to create and manage their profiles\n- **Participant reviews** — real reviews from real NDIS participants\n- **Search improvements** — better filtering by service type, location, and availability\n- **Registration status badges** — showing which providers are registered ahead of the July 2026 deadline\n\n## Built for the NDIS Community\n\nReferAus exists to make finding NDIS providers easier and more transparent. We are a small team building something we believe matters. If you are a provider, [list your services for free](https://referaus.com/register). If you are a participant, [search providers in your area](https://referaus.com/providers).\n\nWe will keep shipping and keep you posted."
-  },
-  {
     "slug": "ndis-july-2026-mandatory-registration-checklist",
     "title": "NDIS July 2026 Mandatory Registration: What Every Provider Needs to Know",
     "excerpt": "From 1 July 2026, all NDIS providers must be registered with the NDIS Quality and Safeguards Commission. Here is your complete compliance checklist to get ready before the deadline.",
@@ -223,7 +211,6 @@ export function getRelatedPosts(slug: string, limit = 3): BlogPost[] {
 // Canonical category list (used for filter chips on the blog listing page)
 export const categories = [
   'All',
-  'Platform Updates',
   'NDIS Guide',
   'Provider Tips',
   'Participant Resources',

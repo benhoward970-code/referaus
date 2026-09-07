@@ -49,6 +49,7 @@ export default async function BlogOGImage({ params }: { params: Promise<{ slug: 
         {/* Title */}
         <div
           style={{
+            display: 'flex',
             color: 'white',
             fontSize: title.length > 60 ? 40 : 52,
             fontWeight: 900,
@@ -61,14 +62,15 @@ export default async function BlogOGImage({ params }: { params: Promise<{ slug: 
         </div>
 
         {/* Excerpt */}
-        <div style={{ color: 'rgba(255,255,255,0.75)', fontSize: 22, maxWidth: 800, lineHeight: 1.5 }}>
+        <div style={{ display: 'flex', color: 'rgba(255,255,255,0.75)', fontSize: 22, maxWidth: 800, lineHeight: 1.5 }}>
           {excerpt.length > 120 ? excerpt.slice(0, 117) + '...' : excerpt}
         </div>
 
         {/* Bottom tag */}
-        <div style={{ position: 'absolute', bottom: 48, right: 60 }}>
+        <div style={{ display: 'flex', position: 'absolute', bottom: 48, right: 60 }}>
           <div
             style={{
+              display: 'flex',
               background: '#f97316',
               color: 'white',
               padding: '8px 20px',
