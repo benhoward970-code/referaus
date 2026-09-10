@@ -1,0 +1,7 @@
+# The connectome export is ~370 MB. Fetch it with scripts/fetch_connectome.sh.
+data/*.csv
+data/*.parquet
+data/*.npz
+__pycache__/
+*.pyc
+.pytest_cache/
